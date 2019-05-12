@@ -20,7 +20,7 @@ There are two options for running the script - automatic (for batch processing) 
 
 #### using docker in automatic mode
 
-- `docker run --rm -it -e DISPLAY -v ~/.Xauthority:/root/.Xauthority -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri/:/dev/dri/ --device=/dev/snd -v $(pwd):$(pwd) -v $(pwd):/data --name=gimp-plugin-remove-photosphere-creator ptanov/gimp-plugin-remove-photosphere-creator gimp -i -b '(python-fu-remove-photosphere-creator-batch 0 "*.JPG" "processed/" 580 )' -b '(gimp-quit 0)'`, where
+- `docker run --rm -it -e DISPLAY -v ~/.Xauthority:/root/.Xauthority -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri/:/dev/dri/ --device=/dev/snd -v "$(pwd)":"$(pwd)" -v "$(pwd)":/data --name=gimp-plugin-remove-photosphere-creator ptanov/gimp-plugin-remove-photosphere-creator gimp -i -b '(python-fu-remove-photosphere-creator-batch 0 "*.JPG" "processed/" 580 )' -b '(gimp-quit 0)'`, where
   - `*.JPG` - files to process (in current folder). They must be 360 photos (photospheres) in [equirectangular projection](https://www.google.com/search?q=360+equirectangular+projection&tbm=isch).
   - `processed/` - where to put the the result (healed files)
   - `580` - pixels from the bottom that need to be inspected for the photosphere creator. See [Algorithm explanation](#Algorithm) for more information.
@@ -40,7 +40,7 @@ There are two options for running the script - automatic (for batch processing) 
 
 #### using docker in manual mode
 
-- `docker run --rm -it -e DISPLAY -v ~/.Xauthority:/root/.Xauthority -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri/:/dev/dri/ --device=/dev/snd -v $(pwd):$(pwd) -v $(pwd):/data --name=gimp-plugin-remove-photosphere-creator ptanov/gimp-plugin-remove-photosphere-creator`
+- `docker run --rm -it -e DISPLAY -v ~/.Xauthority:/root/.Xauthority -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v /dev/dri/:/dev/dri/ --device=/dev/snd -v "$(pwd)":"$(pwd)" -v "$(pwd)":/data --name=gimp-plugin-remove-photosphere-creator ptanov/gimp-plugin-remove-photosphere-creator`
 - Open image that is photosphere (360&deg; photo) in [equirectangular projection](https://www.google.com/search?q=360+equirectangular+projection&tbm=isch)
 - Use `Filters > Enhance > Remove the creator of the photosphere`, where:
   - `How much to select (e.g. 320)?` pixels from the bottom that need to be inspected for the photosphere creator. See [Algorithm explanation](#Algorithm) for more information
